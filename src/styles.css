@@ -1,0 +1,73 @@
+/* src/styles.css */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    padding: 20px;
+  }
+  
+  .navbar {
+    background-color: #430099;
+  }
+  
+  .navbar a {
+    color: #fff;
+    margin-right: 15px;
+    text-decoration: none;
+  }
+  
+  .navbar a:hover {
+    text-decoration: underline;
+  }
+  
+  .navbar .MuiButton-root {
+    color: #fff;
+  }
+  
+  .list-item {
+    background-color: #fff;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .list-item-avatar {
+    margin-right: 15px;
+  }
+  
+  .list-item-text {
+    flex-grow: 1;
+  }
+  
+  .list-item-icon {
+    color: #430099;
+  }
+  
+  .image-gallery {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  

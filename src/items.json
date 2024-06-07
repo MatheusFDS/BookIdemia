@@ -1,0 +1,19 @@
+[
+    {
+      "id": "0000001",
+      "name": "Cartão de Crédito",
+      "type": "cartao",
+      "axCode": "AX001",
+      "legacyCode": "LEG001",
+      "image": null
+    },
+    {
+      "id": "0000002",
+      "name": "Carta Berço",
+      "type": "carta",
+      "axCode": "AX002",
+      "legacyCode": "LEG002",
+      "image": null
+    }
+  ]
+  
