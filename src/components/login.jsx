@@ -14,7 +14,7 @@ function Login() {
     e.preventDefault();
     const user = await login(email, password);
     if (user) {
-      navigate('/items');
+      navigate('/consulta-de-itens');
     } else {
       alert('Email ou senha inválidos');
     }

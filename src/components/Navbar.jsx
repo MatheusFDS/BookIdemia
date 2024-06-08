@@ -11,8 +11,8 @@ function Navbar() {
   return (
     <AppBar position="static" className="navbar">
       <Toolbar>
-        <Typography variant="h6" style={{ flexGrow: 1 }}>
-          Sistema de Gerenciamento
+        <Typography component={Link} to="/consulta-de-itens" variant="h6" style={{ flexGrow: 1 }}>
+          Idemia Book
         </Typography>
         {user ? (
           <>

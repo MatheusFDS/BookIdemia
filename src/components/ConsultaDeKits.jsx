@@ -1,10 +1,12 @@
-// src/components/ConsultaDeKits.js
 import React, { useState, useEffect } from 'react';
 import { Container, Typography, List, ListItem, ListItemText, ListItemAvatar, Avatar, TextField } from '@mui/material';
 import { searchKitByItemId, getKits } from '../api';
 import ImageGallery from 'react-image-gallery';
 import Modal from 'react-modal';
 import '../styles.css';
+import 'react-image-gallery/styles/css/image-gallery.css';
+
+Modal.setAppElement('#root'); // Definir o elemento de app para acessibilidade
 
 function ConsultaDeKits() {
   const [kits, setKits] = useState([]);
@@ -56,30 +58,33 @@ function ConsultaDeKits() {
         value={searchQuery}
         onChange={handleSearch}
       />
-      {kits.map(kit => (
-        <div key={kit.cardNumber}>
-          <Typography variant="h4">Cartão: {kit.cardNumber}</Typography>
-          <List>
-            {kit.items.map(item => (
-              <ListItem key={item.id} className="list-item">
-                <ListItemAvatar className="list-item-avatar">
-                  <Avatar src={item.image} onClick={() => handleImageClick(kit.items.map(i => i.image))} />
-                </ListItemAvatar>
-                <ListItemText
-                  primary={item.name}
-                  secondary={`AX: ${item.axCode}, Legacy: ${item.legacyCode}`}
-                  className="list-item-text"
-                />
-              </ListItem>
-            ))}
-          </List>
-        </div>
-      ))}
-      <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} className="modal" overlayClassName="overlay" ariaHideApp={false}>
-        <div className="modal-content">
-          <ImageGallery items={selectedImages} className="image-gallery" />
-          <button onClick={handleCloseModal}>Fechar</button>
-        </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        {kits.map(kit => (
+          <div key={kit.cardNumber} style={{ margin: '10px' }}>
+            <Typography variant="h4">
+              KIT: {kit.cardNumber}
+            </Typography>
+            <List style={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', overflowX: 'auto' }}>
+              {kit.items.map(item => (
+                <ListItem key={item.id} className="list-item" style={{ minWidth: '200px' }}>
+                  <ListItemAvatar className="list-item-avatar">
+                    <Avatar onClick={() => handleImageClick(kit.items.map(i => i.image))} style={{ cursor: 'pointer' }}>
+                      <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%' }} />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={item.name}
+                    secondary={`AX: ${item.axCode}, Legacy: ${item.legacyCode}`}
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </div>
+        ))}
+      </div>
+      <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} style={{ content: { zIndex: 1000 } }}>
+        <ImageGallery items={selectedImages} />
+        <button onClick={handleCloseModal}>Fechar</button>
       </Modal>
     </Container>
   );

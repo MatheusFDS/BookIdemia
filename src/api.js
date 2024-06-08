@@ -1,4 +1,3 @@
-// src/api.js
 const usersKey = 'users';
 const itemsKey = 'items';
 const kitsKey = 'kits';
@@ -53,8 +52,14 @@ export const getItemById = async (id) => {
   return items.find(item => item.id === id);
 };
 
-export const searchItems = async (query) => {
-  return items.filter(item => item.name.toLowerCase().includes(query.toLowerCase()));
+export const searchItemsByQuery = async (query) => {
+  const lowerCaseQuery = query.toLowerCase();
+  return items.filter(item =>
+    item.id.toLowerCase().includes(lowerCaseQuery) ||
+    item.name.toLowerCase().includes(lowerCaseQuery) ||
+    item.axCode.toLowerCase().includes(lowerCaseQuery) ||
+    item.legacyCode.toLowerCase().includes(lowerCaseQuery)
+  );
 };
 
 export const saveItem = async (item) => {
@@ -98,6 +103,11 @@ export const saveKitComposition = async (cardNumber, itemIds) => {
   saveToLocalStorage(kitsKey, kitCompositions);
 };
 
+export const updateKitComposition = async (cardNumber, itemIds) => {
+  kitCompositions[cardNumber] = itemIds;
+  saveToLocalStorage(kitsKey, kitCompositions);
+};
+
 export const deleteKitComposition = async (cardNumber) => {
   delete kitCompositions[cardNumber];
   saveToLocalStorage(kitsKey, kitCompositions);
@@ -113,13 +123,7 @@ export const getKits = async () => {
 };
 
 export const searchKitByItemId = async (query) => {
-  const lowerCaseQuery = query.toLowerCase();
-  const matchedItems = items.filter(item =>
-    item.id.includes(lowerCaseQuery) ||
-    item.name.toLowerCase().includes(lowerCaseQuery) ||
-    item.axCode.toLowerCase().includes(lowerCaseQuery) ||
-    item.legacyCode.toLowerCase().includes(lowerCaseQuery)
-  );
+  const matchedItems = await searchItemsByQuery(query);
 
   const matchedItemIds = matchedItems.map(item => item.id);
 
